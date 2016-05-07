@@ -28,3 +28,7 @@ void Video::setPriceCode(int new_price_code) {
 
     price_code = new_price_code;
 }
+
+int Video::getPriceCode() {
+	return price_code;
+}

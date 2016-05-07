@@ -15,7 +15,7 @@
 // constructor
 Customer::Customer(const std::string& name)
     : name(name)
-{ }
+{ frequentRenterPoints=0;}
 
 // customer name
 std::string Customer::getName() const {
@@ -23,11 +23,21 @@ std::string Customer::getName() const {
     return name;
 }
 
+//increment the frequent renter points
+void Customer::addPoints(int points) {
+	
+	frequentRenterPoints++;
+	
+	
+}
+
 // add a rental to this customer
 void Customer::addRental(const Rental& rental) {
 
     rentals.push_back(rental);
 }
+
+
 
 // customer rental statement
 std::string Customer::statement() const {
@@ -39,17 +49,16 @@ std::string Customer::statement() const {
 
     // rentals
     double totalAmount = 0;
-    int frequentRenterPoints = 0;
+    
     for (std::vector<Rental>::const_iterator it = rentals.begin(); it != rentals.end(); ++it) {
 
         // every rental is a rental point
-        ++frequentRenterPoints;
+        addPoints();
 
         // new releases rented for more then one day gives a bonus rental point
         if (it->getVideo().getCode() == Video::NEW_RELEASE &&
             it->getDaysRented() > 1 )
-            ++frequentRenterPoints;
-
+            addPoints();
         // title of rental
         result += "\t";
         result += it->getVideo().getTitle();

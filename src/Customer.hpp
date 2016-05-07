@@ -17,6 +17,7 @@ public:
 
     // constructor
     Customer(const std::string& name);
+	int frequentRenterPoints;
 
     // customer name
     std::string getName() const;
